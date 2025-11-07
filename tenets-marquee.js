@@ -1,12 +1,10 @@
 (() => {
-  const MOBILE_MEDIA = '(max-width: 768px)';
-  const LOOP_DURATION_MS = 60000; // match desktop CSS animation speed
-  const RESUME_DELAY_MS = 400;
-  const controllers = new Set();
-  const canMatchMedia = typeof window.matchMedia === 'function';
-  const prefersReducedMotion = canMatchMedia
+  const LOOP_DURATION_MS = 60000;
+  const pointerFineQuery = typeof window.matchMedia === 'function' ? window.matchMedia('(pointer: fine)') : null;
+  const pointerCoarseQuery = typeof window.matchMedia === 'function' ? window.matchMedia('(pointer: coarse)') : null;
+  const prefersReducedMotion = typeof window.matchMedia === 'function'
     ? window.matchMedia('(prefers-reduced-motion: reduce)')
-    : { matches: false };
+    : { matches: false, addEventListener: () => {} };
 
   const addMediaListener = (mq, handler) => {
     if (!mq || typeof handler !== 'function') return;
@@ -17,42 +15,34 @@
     }
   };
 
-  class TenetsMarqueeScroller {
-    constructor(root) {
-      this.root = root;
-      this.viewport = root.querySelector('.tenets-marquee__viewport');
-      this.track = root.querySelector('.tenets-marquee__track');
+  const prefersFinePointer = () => {
+    if (pointerFineQuery) return pointerFineQuery.matches;
+    if (pointerCoarseQuery) return !pointerCoarseQuery.matches;
+    return window.innerWidth >= 1024;
+  };
+
+  class DesktopMarquee {
+    constructor(viewport) {
+      this.viewport = viewport;
+      this.track = viewport ? viewport.querySelector('.tenets-marquee__track') : null;
       if (!this.viewport || !this.track) {
         this.initialized = false;
         return;
       }
 
       this.initialized = true;
-      this.enabled = false;
-      this.isPointerActive = false;
-      this.resumeTimer = null;
-      this.rafId = null;
-      this.lastTimestamp = null;
       this.loopWidth = 0;
       this.pxPerMs = 0;
-      this.isAutoScrolling = false;
+      this.rafId = null;
+      this.lastTimestamp = null;
 
       this.step = this.step.bind(this);
-      this.handlePointerDown = this.handlePointerDown.bind(this);
-      this.handlePointerUp = this.handlePointerUp.bind(this);
-      this.handleScroll = this.handleScroll.bind(this);
-      this.handleResize = this.handleResize.bind(this);
       this.handleMediaChange = this.handleMediaChange.bind(this);
+      this.handleResize = this.handleResize.bind(this);
 
-      this.mobileQuery = canMatchMedia ? window.matchMedia(MOBILE_MEDIA) : null;
-
-      this.viewport.addEventListener('pointerdown', this.handlePointerDown, { passive: true });
-      this.viewport.addEventListener('pointerup', this.handlePointerUp, { passive: true });
-      this.viewport.addEventListener('pointercancel', this.handlePointerUp, { passive: true });
-      this.viewport.addEventListener('pointerleave', this.handlePointerUp, { passive: true });
-      this.viewport.addEventListener('scroll', this.handleScroll, { passive: true });
-
-      addMediaListener(this.mobileQuery, this.handleMediaChange);
+      addMediaListener(pointerFineQuery, this.handleMediaChange);
+      addMediaListener(pointerCoarseQuery, this.handleMediaChange);
+      addMediaListener(prefersReducedMotion, this.handleMediaChange);
 
       if (typeof ResizeObserver !== 'undefined') {
         this.resizeObserver = new ResizeObserver(() => this.updateMetrics());
@@ -65,71 +55,41 @@
       this.handleMediaChange();
     }
 
-    refresh() {
-      this.updateMetrics();
-      this.handleMediaChange();
-    }
-
-    handleMotionPreferenceChange() {
-      this.handleMediaChange();
-    }
-
-    handleMediaChange() {
-      const isMobile = this.mobileQuery ? this.mobileQuery.matches : window.innerWidth <= 768;
-      const shouldEnable = isMobile && !prefersReducedMotion.matches;
-      if (shouldEnable) {
-        this.enable();
-      } else {
-        this.disable();
-      }
+    shouldRun() {
+      return prefersFinePointer() && !prefersReducedMotion.matches;
     }
 
     handleResize() {
       this.updateMetrics();
-      if (!this.mobileQuery) {
-        this.handleMediaChange();
-      } else if (this.enabled) {
-        this.normalizeScroll();
-        this.startLoop();
+      if (this.shouldRun()) {
+        this.start();
+      } else {
+        this.stop();
+      }
+    }
+
+    handleMediaChange() {
+      if (this.shouldRun()) {
+        this.start();
+      } else {
+        this.stop();
       }
     }
 
     updateMetrics() {
-      const trackWidth = this.track.scrollWidth;
-      const candidate = trackWidth / 2;
-      this.loopWidth = candidate > 0 ? candidate : trackWidth;
-      if (!this.loopWidth || this.loopWidth <= this.viewport.clientWidth) {
-        this.pxPerMs = 0;
-        return;
-      }
-      this.pxPerMs = this.loopWidth / LOOP_DURATION_MS;
+      if (!this.track) return;
+      const totalWidth = this.track.scrollWidth;
+      this.loopWidth = totalWidth / 2 || totalWidth;
+      this.pxPerMs = this.loopWidth ? this.loopWidth / LOOP_DURATION_MS : 0;
     }
 
-    enable() {
-      if (this.enabled) return;
-      this.enabled = true;
-      this.updateMetrics();
-      this.normalizeScroll();
-      this.startLoop();
-    }
-
-    disable() {
-      if (!this.enabled) return;
-      this.enabled = false;
-      this.stopLoop();
-      this.clearResumeTimer();
-      this.isPointerActive = false;
-      this.viewport.scrollLeft = 0;
-    }
-
-    startLoop() {
-      if (!this.enabled || this.isPointerActive || !this.pxPerMs) return;
-      if (this.rafId !== null) return;
+    start() {
+      if (this.rafId !== null || !this.pxPerMs) return;
       this.lastTimestamp = null;
       this.rafId = requestAnimationFrame(this.step);
     }
 
-    stopLoop() {
+    stop() {
       if (this.rafId !== null) {
         cancelAnimationFrame(this.rafId);
         this.rafId = null;
@@ -138,8 +98,8 @@
     }
 
     step(timestamp) {
-      if (!this.enabled || this.isPointerActive || !this.pxPerMs || prefersReducedMotion.matches || !this.mobileQuery.matches) {
-        this.stopLoop();
+      if (!this.shouldRun() || !this.pxPerMs) {
+        this.stop();
         return;
       }
 
@@ -149,86 +109,140 @@
 
       const delta = timestamp - this.lastTimestamp;
       this.lastTimestamp = timestamp;
-
-      this.isAutoScrolling = true;
       this.viewport.scrollLeft += delta * this.pxPerMs;
-      this.normalizeScroll();
-      this.isAutoScrolling = false;
-
+      if (this.loopWidth) {
+        this.viewport.scrollLeft %= this.loopWidth;
+      }
       this.rafId = requestAnimationFrame(this.step);
-    }
-
-    handlePointerDown() {
-      this.isPointerActive = true;
-      this.stopLoop();
-      this.clearResumeTimer();
-    }
-
-    handlePointerUp() {
-      if (!this.isPointerActive) return;
-      this.isPointerActive = false;
-      this.scheduleResume();
-    }
-
-    handleScroll() {
-      if (!this.enabled || this.isAutoScrolling) return;
-      this.stopLoop();
-      this.scheduleResume();
-    }
-
-    scheduleResume() {
-      if (!this.enabled) return;
-      this.clearResumeTimer();
-      this.resumeTimer = window.setTimeout(() => {
-        if (!this.enabled || this.isPointerActive) return;
-        this.normalizeScroll();
-        this.startLoop();
-      }, RESUME_DELAY_MS);
-    }
-
-    clearResumeTimer() {
-      if (this.resumeTimer) {
-        clearTimeout(this.resumeTimer);
-        this.resumeTimer = null;
-      }
-    }
-
-    normalizeScroll() {
-      if (!this.loopWidth) return;
-      const max = this.loopWidth;
-      const current = this.viewport.scrollLeft;
-      if (current >= max || current < 0) {
-        const normalized = ((current % max) + max) % max;
-        this.viewport.scrollLeft = normalized;
-      }
     }
   }
 
-  const initTenetsMarquees = () => {
-    document.querySelectorAll('.tenets-marquee').forEach((root) => {
-      if (root.__tenetsMarquee) {
-        root.__tenetsMarquee.refresh();
+  class TenetsCarousel {
+    constructor(root) {
+      this.root = root;
+      this.viewport = root.querySelector('.tenets-carousel__viewport');
+      this.slides = this.viewport ? Array.from(this.viewport.querySelectorAll('.tenet')) : [];
+      if (!this.viewport || this.slides.length === 0) {
+        this.initialized = false;
         return;
       }
-      const controller = new TenetsMarqueeScroller(root);
+
+      this.dotsContainer = root.querySelector('.tenets-carousel__dots');
+      this.dots = [];
+      this.activeIndex = 0;
+      this.scrollRaf = null;
+      this.isProgrammatic = false;
+
+      this.handleScroll = this.handleScroll.bind(this);
+      this.handleResize = this.handleResize.bind(this);
+
+      this.buildDots();
+      this.updateActive(0);
+
+      this.viewport.addEventListener('scroll', this.handleScroll, { passive: true });
+      window.addEventListener('resize', this.handleResize);
+
+      this.initialized = true;
+    }
+
+    buildDots() {
+      if (!this.dotsContainer) return;
+      this.dotsContainer.innerHTML = '';
+      this.dots = this.slides.map((slide, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'tenets-carousel__dot';
+        const label = slide.getAttribute('aria-label') || slide.querySelector('.tenet__title')?.textContent || `Tenet ${index + 1}`;
+        button.setAttribute('aria-label', `Show ${label}`);
+        button.addEventListener('click', () => this.goToSlide(index));
+        this.dotsContainer.appendChild(button);
+        return button;
+      });
+    }
+
+    handleResize() {
+      this.updateActive(this.activeIndex);
+    }
+
+    handleScroll() {
+      if (this.isProgrammatic) return;
+      if (this.scrollRaf) return;
+      this.scrollRaf = requestAnimationFrame(() => {
+        this.scrollRaf = null;
+        this.updateFromScroll();
+      });
+    }
+
+    updateFromScroll() {
+      const midpoint = this.viewport.scrollLeft + this.viewport.clientWidth / 2;
+      let closestIndex = 0;
+      let minDelta = Number.POSITIVE_INFINITY;
+      this.slides.forEach((slide, index) => {
+        const slideMid = slide.offsetLeft + slide.clientWidth / 2;
+        const delta = Math.abs(slideMid - midpoint);
+        if (delta < minDelta) {
+          minDelta = delta;
+          closestIndex = index;
+        }
+      });
+      this.updateActive(closestIndex);
+    }
+
+    goToSlide(index) {
+      if (!this.slides[index]) return;
+      this.isProgrammatic = true;
+      const left = this.slides[index].offsetLeft;
+      this.viewport.scrollTo({ left, behavior: 'smooth' });
+      this.updateActive(index);
+      setTimeout(() => {
+        this.isProgrammatic = false;
+      }, 500);
+    }
+
+    updateActive(index) {
+      this.activeIndex = index;
+      this.dots.forEach((dot, idx) => {
+        dot.setAttribute('aria-current', idx === index ? 'true' : 'false');
+      });
+    }
+  }
+
+  const initDesktopMarquees = () => {
+    document.querySelectorAll('.tenets-marquee__viewport--desktop').forEach((viewport) => {
+      if (viewport.__tenetsMarquee) {
+        viewport.__tenetsMarquee.handleResize();
+        return;
+      }
+      const controller = new DesktopMarquee(viewport);
       if (controller.initialized) {
-        controllers.add(controller);
-        root.__tenetsMarquee = controller;
+        viewport.__tenetsMarquee = controller;
       }
     });
   };
 
-  const handleMotionChange = () => {
-    controllers.forEach((controller) => controller.handleMotionPreferenceChange());
+  const initCarousels = () => {
+    document.querySelectorAll('.tenets-carousel').forEach((root) => {
+      if (root.__tenetsCarousel) {
+        root.__tenetsCarousel.handleResize();
+        return;
+      }
+      const carousel = new TenetsCarousel(root);
+      if (carousel.initialized) {
+        root.__tenetsCarousel = carousel;
+      }
+    });
   };
 
-  addMediaListener(prefersReducedMotion, handleMotionChange);
+  const initTenets = () => {
+    initDesktopMarquees();
+    initCarousels();
+  };
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTenetsMarquees);
+    document.addEventListener('DOMContentLoaded', initTenets);
   } else {
-    initTenetsMarquees();
+    initTenets();
   }
 
-  document.addEventListener('footer:loaded', initTenetsMarquees);
+  document.addEventListener('footer:loaded', initTenets);
 })();

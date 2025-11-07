@@ -53,8 +53,9 @@
 
         /* CSS Variables */
         :root {
-            --primary: #ee3342;
-            --secondary: #ee3342;
+            --primary: #078f7c;
+            --primary-strong: #047062;
+            --secondary: #10a590;
             --border-color: #d6d9f0;
             --surface: #ffffff;
             --surface-muted: #f8f9fa;
@@ -75,6 +76,7 @@
             --spacing-xl: 2rem;
             --hero-bg-start: #000000; /* black hero */
             --hero-bg-end: #0a0f2a;
+            --hero-overlay: rgba(7, 12, 24, 0.75);
             --hero-accent: #ee3342; /* CTA Red */
             --hero-accent-hover: #ff4d5b;
             --footer-bg: #000000;
