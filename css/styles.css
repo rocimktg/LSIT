@@ -1737,6 +1737,8 @@
 
         .tenets-marquee__viewport {
             overflow: hidden;
+            width: min(1200px, 92vw);
+            margin-inline: auto;
         }
 
         .tenets-marquee__track {
@@ -1841,7 +1843,8 @@
             }
 
             .tenet {
-                flex: 0 0 clamp(260px, 80vw, 360px);
+                flex: 0 0 min(100%, 92vw);
+                max-width: 92vw;
                 scroll-snap-align: center;
             }
 
