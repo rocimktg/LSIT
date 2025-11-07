@@ -1,0 +1,95 @@
+Let's create a instructors.html page.
+
+Utilize the same hero band from the programs page, go ahead and copy the same image background for now.
+
+Let's put together an single instructor profile card. 
+
+1) It will include a portrait of the instructor
+2) Their Title
+3) Their current belt rank
+4) Two 3:1.5 action photos stacked on top of each other (use placeholder boxes for now) on the right hand size of the card (50%)
+5) The biography should take the left side of the card
+6) A single instructor photo (should go on top, with their titles) use master_k_profile.jpg
+
+Use clean UX/UI principles to implement, should be mobile friendly. Reference the locations&schedules page heavily to pick up on styles.
+
+Utilize the same styling from .card on the locations & schedules page.  There's quite a bit of copy, and I also want to include 
+
+Master David Kestenbaum
+7th Degree Black Belt
+Owner / Head Instructor
+
+United States Taekwondo Grandmasters Society & Kukkiwon 6th Dan
+Master David Kestenbaum has dedicated his life to Taekwondo since age 5. Now a 7th degree Black Belt certified by the Kukkiwon world headquarters in Seoul, South Korea, and the United States Taekwondo Grand Masters Society, he combines world-class competitive experience with a passion for developing students of all ages.
+
+Background & Training
+At 24, Master Kestenbaum was recognized as one of the youngest Taekwondo Masters in the world. Over more than 20 years of study, he has trained on two continents and mentored under Grand Master Won Chik Park, Grand Master Roy Kurban, and Grand Master Martin Hall, along with five additional Masters and numerous Olympic and National Team athletes.
+
+Competition Achievements
+Master Kestenbaum has competed successfully in National and International competitions in both Karate and Olympic Style Taekwondo, winning multiple Texas State titles as well as U.S. and Canadian championships. In 2002 he was invited to train at the U.S. Olympic Training Center in Colorado Springs. With over 500 trophies and medals to his name, he continues to compete in the Texas Karate League where he has won over 25 Grand Championships in forms and sparring.
+
+Education & Teaching Philosophy
+A graduate of the University of Texas Arlington with a bachelor's degree in exercise science, Master Kestenbaum has trained athletes from youth to professional levels. He brings a deep passion for Taekwondo, fitness, and helping people reach their greatest potential to every class he teaches.
+
+
+
+-----
+
+lets do the next section.  use master_y.png for the avatar. 
+
+Master Jenny Yu
+5th Degree Black Belt
+Program Director / Head Instructor
+Cliff Nelson Rec. Center | Dottie Lynn Rec. Center | The Montessori Academy
+
+... I don't have any action photos for her, so just leave those 2 boxes blank and I'll add in them in later
+
+Master Jenny Yu brings over two decades of dedication to Taekwondo and a gift for teaching that has made her an integral part of Lone Star Institute of Taekwondo. Teaching at various schools and recreation centers, she specializes in developing young martial artists and building strong foundations in students of all ages.
+
+Background & Training
+Master Yu began her Taekwondo training in June 1999 at the American Black Belt Academy under Grand Master Roy Kurban, achieving her 1st degree black belt in October 2009. She continued her journey at the Traditional Martial Arts Institute under Mr. Shaun House, earning her 2nd degree black belt in 2011. Master Yu then joined Lone Star Institute of Taekwondo, where she has become a cornerstone of the teaching and training programs.
+
+Teaching Experience
+Since 2011, Master Yu has led the Taekwondo program at The Montessori Academy, where she excels at teaching and developing young martial artists. Her patient approach and clear instruction style have helped countless students discover their potential through martial arts.
+
+Education & Teaching Philosophy
+A graduate of the University of Texas Arlington with a bachelor's degree in mathematics and a minor in physics, Master Yu brings analytical thinking and structured problem-solving to her teaching. She has a passion for Taekwondo, education, and encouraging others to be the best they can be.
+
+-----
+
+
+next card.  Master Bradford Woods  use master_bw.png for the avatar, leave the action photos blank
+
+5th Degree Black Belt
+Program Director / Head Instructor
+Elzie Odom Recreation Center
+
+Master Bradford Woods discovered Taekwondo the same way many parents do—watching his son take class. What began as support from the sidelines quickly became a personal passion when he decided to jump in and train alongside him. Now a 5th degree black belt, Master Woods leads the program at the Elzie Odom branch of Lone Star Institute of Taekwondo.
+
+Competition Achievements
+Master Woods has been ranked in the top ten competitors of the Traditional Karate League three times and has earned numerous medals, trophies, and accolades throughout his martial arts journey.
+
+Community Leadership
+Beyond the dojang, Master Woods has a long history of serving his community. He has coached youth football, served as vice president of the Seguin High School Band Booster Club, and remains an active leader in his church. He currently works for McCormick & Co.
+
+Teaching Philosophy
+As a parent who became a martial artist, Master Woods understands the family perspective and brings that insight to every class he teaches. He is dedicated to helping students of all ages develop discipline, confidence, and a lifelong love of Taekwondo.
+
+
+
+----- 
+next card
+use Master_L.png for the avatar
+Mr. Joseph Louis
+4th Degree Black Belt
+Instructor
+Cliff Nelson Rec. Center
+Dottie Lynn Rec. Center
+Mr. Joseph Louis has been dedicated to Taekwondo for over two decades, beginning his journey in 1999 at the Dottie Lynn Recreation Center under Master Henry. His commitment to the art is evident in his continued growth as both a martial artist and instructor within the Lone Star Institute of Taekwondo family.
+Background & Training
+After 10 years of diligent training, Mr. Louis earned his 1st degree black belt in 2009. He continued his journey at Lone Star Institute of Taekwondo, achieving his 2nd degree black belt in 2011. Mr. Louis continues to train and compete, constantly refining his skills and knowledge.
+Teaching Experience
+Mr. Louis has become an integral part of LSIT's family of instructors, teaching at both Cliff Nelson Recreation Center and Dottie Lynn Recreation Center where his journey began. He brings patience, dedication, and a deep understanding of the challenges students face on their path to black belt.
+Professional Life
+Mr. Louis is employed by the United States Postal Service, balancing his professional career with his passion for teaching and training in Taekwondo.
+

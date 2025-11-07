@@ -1,0 +1,452 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lonestar Institute of Taekwando</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/reset_and_variables.css">
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <main>
+        <section class="hero" aria-labelledby="hero-heading">
+            <div class="hero__media" aria-hidden="true">
+                <video class="hero__video" autoplay muted loop playsinline>
+                    <source src="video/tkd.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="hero__content">
+                <p class="hero__eyebrow">Lonestar Institute of Taekwondo</p>
+                <h1 id="hero-heading" class="hero__title">
+                    Martial Arts for<br /> the Whole Family
+                </h1>
+                <p class="hero__subtitle">
+                    Discover award-winning classes for kids, teens, and adults guided by world-class instructors dedicated to confidence, discipline, and real self-defense.
+                </p>
+                <div class="hero__actions">
+                    <a href="#free-week" class="hero__button hero__button--primary">
+                        <span class="hero__button-label">Claim Free Week</span>
+                        <i data-lucide="calendar" aria-hidden="true"></i>
+                    </a>
+                    <a href="tel:+16825548531" class="hero__button hero__button--secondary">
+                        <span class="hero__button-label">Call Now</span>
+                        <i data-lucide="arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="free-week" class="lead-capture" aria-labelledby="lead-capture-heading">
+            <div class="lead-capture__container">
+                <div class="lead-capture__content">
+                    <div class="lead-capture__info">
+                        <header class="lead-capture__header">
+                            <h2 id="lead-capture-heading" class="lead-capture__title">
+                                Claim Your Free Week of Martial Arts Classes
+                            </h2>
+                            <div class="lead-capture__rating" aria-label="Rated five out of five by over two hundred students">
+                                <span class="lead-capture__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                                <p>Rated 5/5 by 200+ students</p>
+                            </div>
+                            <p class="lead-capture__tagline">
+                                Start your free trial class today &mdash; no experience needed!
+                            </p>
+                        </header>
+
+                        <ul class="lead-capture__highlights">
+                            <li><i data-lucide="lock" aria-hidden="true"></i>Secure &amp; spam-free</li>
+                            <li><i data-lucide="check-circle" aria-hidden="true"></i>Cancel anytime</li>
+                        </ul>
+
+                        <p id="lead-capture-disclaimer" class="lead-capture__disclaimer">
+                            By submitting, you agree to receive promotional messages from Lonestar Institute of Taekwando. Reply STOP to opt out. Msg &amp; data rates may apply. <a href="#terms">[Terms &amp; Conditions]</a> and <a href="#privacy">[Privacy Policy]</a>
+                        </p>
+                    </div>
+
+                    <div class="lead-capture__card">
+                        <form class="lead-capture__form" action="#" method="post" novalidate aria-describedby="lead-capture-disclaimer">
+                            <div class="lead-capture__field">
+                                <label class="lead-capture__micro-label" for="lead-name">Name</label>
+                                <input type="text" id="lead-name" name="name" placeholder="John Smith" required>
+                            </div>
+                            <div class="lead-capture__field">
+                                <label class="lead-capture__micro-label" for="lead-phone">Phone</label>
+                                <input type="tel" id="lead-phone" name="phone" placeholder="(555) 123-4567" required>
+                            </div>
+                            <div class="lead-capture__field">
+                                <label class="lead-capture__micro-label" for="lead-email">Email</label>
+                                <input type="email" id="lead-email" name="email" placeholder="john@example.com" required>
+                            </div>
+
+                            <div class="lead-capture__consent">
+                                <input type="checkbox" id="lead-consent" name="consent">
+                                <label for="lead-consent">Keep me updated on offers and classes.</label>
+                            </div>
+
+                            <button type="submit" class="lead-capture__submit">
+                                CLAIM FREE WEEK
+                                <i data-lucide="arrow-right" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="age-groups" aria-labelledby="age-groups-heading">
+            <div class="age-groups__container">
+                <header class="age-groups__header">
+                    <p class="age-groups__eyebrow">Classes for Every Age</p>
+                    <h2 id="age-groups-heading" class="age-groups__title">Our Programs</h2>
+                    <p class="age-groups__intro">
+                        Tailored martial arts training that grows with your family: building focus, confidence, and real self-defense skills at every stage.
+                    </p>
+                </header>
+
+                <div class="age-groups__grid">
+                    <article class="program-card">
+                        <a class="program-card__image-link" href="programs.html#youth">
+                            <img class="program-card__image" src="img/ninja.jpg" alt="Little Ninjas">
+                        </a>
+                        <span class="program-card__badge">Ages 3-5</span>
+                        <h3 class="program-card__title">Little Ninjas</h3>
+                        <p class="program-card__description">Small kids can learn to stay safe! We teach awareness, self-defense basics, and confident voices through fun drills and teamwork in a safe, positive space made for beginners.
+                        </p>
+                        <div class="program-card__footer">
+                            <span class="program-card__rating" aria-label="Five star parent approved">&#9733;&#9733;&#9733;&#9733;&#9733; Parent Approved</span>
+                            <a href="programs.html#youth" class="program-card__cta">
+                                Learn More
+                                <i data-lucide="arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="program-card">
+                        <a class="program-card__image-link" href="programs.html#youth">
+                            <img class="program-card__image program-card__image--youth" src="img/youth.jpg" alt="Youth Martial Arts">
+                        </a>
+                        <span class="program-card__badge">Ages 6-17</span>
+                        <h3 class="program-card__title">Youth Martial Arts</h3>
+                        <p class="program-card__description">
+                            Perfect for aspiring karate kids! Students learn real self-defense against bullies and build confidence while staying fit. Great for individual growth or parent-child bonding in a supportive family environment.
+                        </p>
+                        <div class="program-card__footer">
+                            <span class="program-card__rating" aria-label="Five star parent approved">&#9733;&#9733;&#9733;&#9733;&#9733; Parent Approved</span>
+                            <a href="programs.html#youth" class="program-card__cta">
+                                Learn More
+                                <i data-lucide="arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="program-card">
+                        <a class="program-card__image-link" href="programs.html#adult">
+                            <img class="program-card__image program-card__image--adult" src="img/adult.jpg" alt="Adult Classes">
+                        </a>
+                        <span class="program-card__badge">Ages 18+</span>
+                        <h3 class="program-card__title">Adult Classes</h3>
+                        <p class="program-card__description">
+                            Whether you want to master self-defense, stay fit, or enjoy family training time, our classes teach real-world techniques while building confidence. The family that kicks together, sticks together!
+                        </p>
+                    <div class="program-card__footer">
+                        <span class="program-card__rating program-card__rating--spacer" aria-hidden="true"></span>
+                        <a href="programs.html#adult" class="program-card__cta">
+                            Learn More
+                            <i data-lucide="arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section class="progression" id="sparring-competition" aria-labelledby="progression-heading">
+            <div class="progression__container">
+                <header class="progression__header">
+                    <p class="progression__eyebrow">Next-Level Opportunities</p>
+                    <h2 id="progression-heading" class="progression__title">From Sparring Class to Competition Excellence</h2>
+                    <p class="progression__intro">
+                        Help students channel disciplined training into high-impact experiences that showcase precision, confidence, and competitive spirit.
+                    </p>
+                </header>
+
+                <div class="progression__grid" role="list">
+                    <article class="progression-card progression-card--sparring" role="listitem">
+                        <span class="progression-card__tag">Orange Belt Milestone</span>
+                        <div class="progression-card__icon" aria-hidden="true">
+                            <i data-lucide="swords"></i>
+                        </div>
+                        <h3 class="progression-card__title">SPARRING CLASS</h3>
+                        <div class="progression-card__body">
+                            <p>Students who reach the rank of orange belt are able to begin sparring.</p>
+                            <p>LSIT students and instructors apply techniques learned during class in a controlled and structured sparring environment.</p>
+                        </div>
+                    </article>
+
+                    <article class="progression-card progression-card--competition" role="listitem">
+                        <span class="progression-card__tag">Competitive Track</span>
+                        <div class="progression-card__icon" aria-hidden="true">
+                            <i data-lucide="trophy"></i>
+                        </div>
+                        <h3 class="progression-card__title">COMPETITION &amp; TOURNAMENTS</h3>
+                        <div class="progression-card__body">
+                            <p>Are you a competitor?</p>
+                            <p>Lone Star Institute of Taekwondo is a proud member of the Texas Karate League, Texas State Taekwondo Association, and USA Taekwondo.</p>
+                            <p>LSIT students and instructors compete regularly in local, state, and national competitions in both poomsae (forms) and gyoroogi (sparring).</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="footer-cta" aria-labelledby="footer-cta-heading">
+        <div class="footer-cta__container">
+            <p class="footer-cta__eyebrow">Unleash Your Potential</p>
+            <h2 id="footer-cta-heading" class="footer-cta__title">Ready to Train With Lonestar Institute of Taekwando?</h2>
+            <p class="footer-cta__subtitle">
+                Schedule a free consultation with our master instructors and discover the perfect program for your goals.
+            </p>
+            <div class="footer-cta__actions">
+                <a href="#free-week" class="footer-cta__button footer-cta__button--primary">
+                    Claim Free Week
+                    <i data-lucide="calendar-check" aria-hidden="true"></i>
+                </a>
+                <a href="tel:+16825548531" class="footer-cta__button footer-cta__button--secondary">
+                    <i data-lucide="phone-call" aria-hidden="true"></i>
+                    (682) 554-8531
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+    <!-- Sacred Foundation: The Five Tenets -->
+    <section class="tenets-marquee" aria-labelledby="tenets-heading">
+        <h2 id="tenets-heading" class="visually-hidden">The Five Tenets of Taekwondo</h2>
+        <div class="tenets-marquee__viewport" aria-hidden="true">
+            <div class="tenets-marquee__track">
+                <!-- Set A -->
+                <article class="tenet" role="group" aria-label="Courtesy">
+                    <div class="tenet__inner tenet--courtesy">
+                        <div class="tenet__hangul" lang="ko">예의</div>
+                        <h3 class="tenet__title">Courtesy</h3>
+                        <div class="tenet__romanization">Ye-wee</div>
+                        <p class="tenet__desc">A bow of respect to all who enter; humility opens every door.</p>
+                    </div>
+                </article>
+                <article class="tenet" role="group" aria-label="Integrity">
+                    <div class="tenet__inner tenet--integrity">
+                        <div class="tenet__hangul" lang="ko">염치</div>
+                        <h3 class="tenet__title">Integrity</h3>
+                        <div class="tenet__romanization">Yom-chee</div>
+                        <p class="tenet__desc">Unwavering truth—clear as a still mountain lake, strong as bedrock.</p>
+                    </div>
+                </article>
+                <article class="tenet" role="group" aria-label="Perseverance">
+                    <div class="tenet__inner tenet--perseverance">
+                        <div class="tenet__hangul" lang="ko">인내</div>
+                        <h3 class="tenet__title">Perseverance</h3>
+                        <div class="tenet__romanization">Een-nay</div>
+                        <p class="tenet__desc">Endless renewal—the river carves stone; the student rises again.</p>
+                    </div>
+                </article>
+                <article class="tenet" role="group" aria-label="Self Control">
+                    <div class="tenet__inner tenet--selfcontrol">
+                        <div class="tenet__hangul" lang="ko">극기</div>
+                        <h3 class="tenet__title">Self Control</h3>
+                        <div class="tenet__romanization">Gook-gee</div>
+                        <p class="tenet__desc">Perfect balance—the still point within motion, breath finding center.</p>
+                    </div>
+                </article>
+                <article class="tenet" role="group" aria-label="Indomitable Spirit">
+                    <div class="tenet__inner tenet--spirit">
+                        <div class="tenet__hangul" lang="ko">백절불굴</div>
+                        <h3 class="tenet__title">Indomitable Spirit</h3>
+                        <div class="tenet__romanization">Baekjool Boolgool</div>
+                        <p class="tenet__desc">Unbreakable resolve—fire that stands, gives all, and endures.</p>
+                    </div>
+                </article>
+
+                <!-- Set B (duplicate for seamless loop) -->
+                <article class="tenet" role="group" aria-hidden="true">
+                    <div class="tenet__inner tenet--courtesy">
+                        <div class="tenet__hangul" lang="ko">예의</div>
+                        <h3 class="tenet__title">Courtesy</h3>
+                        <div class="tenet__romanization">Ye-wee</div>
+                        <p class="tenet__desc">A bow of respect to all who enter; humility opens every door.</p>
+                    </div>
+                </article>
+                <article class="tenet" role="group" aria-hidden="true">
+                    <div class="tenet__inner tenet--integrity">
+                        <div class="tenet__hangul" lang="ko">염치</div>
+                        <h3 class="tenet__title">Integrity</h3>
+                        <div class="tenet__romanization">Yom-chee</div>
+                        <p class="tenet__desc">Unwavering truth—clear as a still mountain lake, strong as bedrock.</p>
+                    </div>
+                </article>
+                <article class="tenet" role="group" aria-hidden="true">
+                    <div class="tenet__inner tenet--perseverance">
+                        <div class="tenet__hangul" lang="ko">인내</div>
+                        <h3 class="tenet__title">Perseverance</h3>
+                        <div class="tenet__romanization">Een-nay</div>
+                        <p class="tenet__desc">Endless renewal—the river carves stone; the student rises again.</p>
+                    </div>
+                </article>
+                <article class="tenet" role="group" aria-hidden="true">
+                    <div class="tenet__inner tenet--selfcontrol">
+                        <div class="tenet__hangul" lang="ko">극기</div>
+                        <h3 class="tenet__title">Self Control</h3>
+                        <div class="tenet__romanization">Gook-gee</div>
+                        <p class="tenet__desc">Perfect balance—the still point within motion, breath finding center.</p>
+                    </div>
+                </article>
+                <article class="tenet" role="group" aria-hidden="true">
+                    <div class="tenet__inner tenet--spirit">
+                        <div class="tenet__hangul" lang="ko">백절불굴</div>
+                        <h3 class="tenet__title">Indomitable Spirit</h3>
+                        <div class="tenet__romanization">Baekjool Boolgool</div>
+                        <p class="tenet__desc">Unbreakable resolve—fire that stands, gives all, and endures.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer" aria-labelledby="footer-heading">
+        <h2 id="footer-heading" class="visually-hidden">Lonestar Institute of Taekwando Footer</h2>
+        <div class="site-footer__main">
+            <div class="site-footer__column site-footer__column--brand">
+                <div class="site-footer__logo">
+                    <span class="logo-text">LONESTAR<br>INSTITUTE OF<br>TAEKWANDO</span>
+                </div>
+                <p class="site-footer__tagline">
+                    Building confident leaders through disciplined martial arts training for every age and stage.
+                </p>
+                <address class="site-footer__contact" aria-label="Contact information">
+                    <a href="https://maps.google.com/?q=1541+S.+Bowen+Road+Pantego+TX+76013" class="site-footer__contact-link">
+                        <i data-lucide="map-pin" aria-hidden="true"></i>
+                        1541 S. Bowen Road<br /> Pantego, TX 76013
+                    </a>
+                    <a href="tel:+16825548531" class="site-footer__contact-link">
+                        <i data-lucide="phone" aria-hidden="true"></i>
+                        (682) 554-8531
+                    </a>
+                    <a href="mailto:info@LSITKD.com" class="site-footer__contact-link">
+                        <i data-lucide="mail" aria-hidden="true"></i>
+                        info@LSITKD.com
+                    </a>
+                </address>
+         
+            </div>
+
+            <nav class="site-footer__column" aria-labelledby="footer-quick-links-heading">
+                <h3 id="footer-quick-links-heading" class="site-footer__heading">Quick Links</h3>
+                <ul class="site-footer__list">
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#programs">Our Programs</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                </ul>
+            </nav>
+
+            <nav class="site-footer__column" aria-labelledby="footer-programs-heading">
+                <h3 id="footer-programs-heading" class="site-footer__heading">Our Programs</h3>
+                <ul class="site-footer__list">
+                    <li><a href="#little-ninjas"><i data-lucide="sparkles" aria-hidden="true"></i>Little Ninjas (3-5)</a></li>
+                    <li><a href="#kids-program"><i data-lucide="flame" aria-hidden="true"></i>Kids Classes (6-12)</a></li>
+                    <li><a href="#adult-programs"><i data-lucide="shield" aria-hidden="true"></i>Adult Programs (13+)</a></li>
+                    <li><a href="#private-lessons"><i data-lucide="user-round" aria-hidden="true"></i>Private Lessons</a></li>
+                    <li><a href="#competition-team"><i data-lucide="trophy" aria-hidden="true"></i>Competition Team</a></li>
+                </ul>
+            </nav>
+
+            <div class="site-footer__column site-footer__column--newsletter" aria-labelledby="footer-newsletter-heading">
+                <h3 id="footer-newsletter-heading" class="site-footer__heading">Stay Connected</h3>
+                <p class="site-footer__newsletter-text">Get tips, updates, and special offers delivered straight to your inbox.</p>
+                <form class="site-footer__form" action="#" method="post">
+                    <label class="visually-hidden" for="footer-email">Email address</label>
+                    <input type="email" id="footer-email" name="email" placeholder="Enter your email" required>
+                    <button type="submit">
+                        Subscribe
+                        <i data-lucide="send" aria-hidden="true"></i>
+                    </button>
+                </form>
+                <p class="site-footer__privacy">We respect your privacy. Unsubscribe at any time.</p>
+                <div class="site-footer__social" aria-label="Social media">
+                    <a href="https://facebook.com" aria-label="Facebook">
+                        <i data-lucide="facebook" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://instagram.com" aria-label="Instagram">
+                        <i data-lucide="instagram" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://youtube.com" aria-label="YouTube">
+                        <i data-lucide="youtube" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://tiktok.com" aria-label="TikTok">
+                        <i data-lucide="music-4" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <section class="site-footer__trust" aria-label="Trust indicators">
+            <div class="site-footer__trust-item">
+                <i data-lucide="medal" aria-hidden="true"></i>
+                Serving Arlington Since 2015
+            </div>
+            <div class="site-footer__trust-item">
+                <i data-lucide="shield-check" aria-hidden="true"></i>
+                Licensed &amp; Insured
+            </div>
+            <div class="site-footer__trust-item">
+                <i data-lucide="award" aria-hidden="true"></i>
+                BBB Accredited Dojang
+            </div>
+            <div class="site-footer__trust-item">
+                <i data-lucide="credit-card" aria-hidden="true"></i>
+                All Major Cards Accepted
+            </div>
+        </section>
+
+        <div class="site-footer__bottom">
+            <p class="site-footer__copyright">
+                &copy; 2025 Lonestar Institute of Taekwando. All rights reserved.
+            </p>
+            <div class="site-footer__legal">
+                <a href="#privacy">Privacy Policy</a>
+                <span aria-hidden="true">|</span>
+                <a href="#terms">Terms of Service</a>
+                <span aria-hidden="true">|</span>
+                <a href="#accessibility">Accessibility</a>
+            </div>
+            <p class="site-footer__credit">
+                Website by <a href="https://rocinantedigital.com">Rocinante Digital</a>
+            </p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" type="button" aria-label="Back to top">
+        <i data-lucide="chevron-up" aria-hidden="true"></i>
+    </button>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+    <script src="load-nav.js"></script>
+    <script src="load-footer.js"></script>
+    <script src="menu.js"></script>
+</body>
+</html>
+
+
+
+
+
+

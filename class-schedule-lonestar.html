@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martial Arts Class Schedule</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: 55px repeat(5, 1fr);
+            gap: 2px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .time-label, .day-header, .time-slot {
+            padding: 15px;
+            background: white;
+        }
+
+        .time-label {
+            font-weight: 600;
+            color: #4a5568;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+            background: #edf2f7;
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        .day-header {
+            font-weight: 700;
+            color: #2d3748;
+            text-align: center;
+            background: #646464;
+            color: white;
+            font-size: 1.1em;
+            padding: 20px 15px;
+        }
+
+        .time-slot {
+            min-height: 100px;
+            position: relative;
+            background: #f7fafc;
+        }
+
+        .class-block {
+            position: absolute;
+            left: 4px;
+            right: 4px;
+            border-radius: 8px;
+            padding: 12px 12px 8px 12px;
+            background: white;
+            color: #2d3748;
+            font-weight: 500;
+            font-size: 0.9em;
+            line-height: 1.4;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        .class-block:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .class-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .class-name {
+            font-size: 1em;
+            margin-bottom: 4px;
+            font-weight: 600;
+            color: #1a202c;
+        }
+
+        .class-details {
+            font-size: 0.85em;
+            color: #718096;
+            font-weight: 400;
+        }
+
+        .class-band {
+            height: 6px;
+            margin: 8px -12px -8px -12px;
+            border-radius: 0 0 7px 7px;
+        }
+
+        /* Class type colors - matching actual belt colors */
+        .little-ninjas .class-band {
+            background: 
+                linear-gradient(90deg, 
+                    #6b7c5a 0%, #6b7c5a 25%, 
+                    #8a9b7a 25%, #8a9b7a 50%, 
+                    #5a6b4a 50%, #5a6b4a 75%, 
+                    #7a8b6a 75%, #7a8b6a 100%);
+            background-size: 40px 100%;
+        }
+
+        .beginner .class-band {
+            background: linear-gradient(90deg, 
+                #ffffff 0%, 
+                #ffffff 28%,
+                #ffeb3b 33%,
+                #ffeb3b 61%, 
+                #ff9800 66%,
+                #ff6f00 100%
+            );
+        }
+
+        .intermediate .class-band {
+            background: linear-gradient(90deg, 
+                #374F2F 0%, 
+                #374F2F 28%,
+                #1565c0 33%,
+                #1565c0 61%, 
+                #6a1b9a 66%,
+                #4a148c 100%
+            );
+        }
+
+        .advanced .class-band {
+            background: linear-gradient(90deg, 
+                #5d4037 0%, 
+                #5d4037 28%,
+                #c62828 33%,
+                #c62828 61%, 
+                #212121 66%,
+                #000000 100%
+            );
+        }
+
+        .all-belts .class-band {
+            background: linear-gradient(
+                90deg, 
+                #ffffff 0%, 
+                #ffffff 11%,
+                #ffeb3b 11%, 
+                #ffeb3b 22%,
+                #ff9800 22%,
+                #ff9800 33%,
+                #374F2F 33%, 
+                #374F2F 44%,
+                #1565c0 44%, 
+                #1565c0 55%,
+                #6a1b9a 55%,
+                #6a1b9a 66%,
+                #5d4037 66%,
+                #5d4037 77%,
+                #c62828 77%,
+                #c62828 88%,
+                #212121 88%,
+                #212121 100%
+            );
+        }
+
+        .sparring .class-band {
+            background: linear-gradient(90deg, #dc143c 0%, #8b0000 100%);
+        }
+
+        .conditioning .class-band {
+            background: linear-gradient(90deg, #4a90e2 0%, #2c5aa0 100%);
+        }
+
+        /* Height classes for different duration blocks */
+        .duration-30 {
+            height: calc(100% - 8px);
+            top: 4px;
+        }
+
+        .duration-50 {
+            height: calc(100% - 8px);
+            top: 4px;
+        }
+
+        .duration-60 {
+            height: calc(100% - 8px);
+            top: 4px;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .schedule-grid {
+                font-size: 0.9em;
+            }
+
+            .class-block {
+                font-size: 0.75em;
+                padding: 8px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                padding-bottom: 80px;
+            }
+
+            .container {
+                padding: 15px;
+                border-radius: 15px;
+                margin-bottom: 30px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+                margin-bottom: 5px;
+            }
+
+            .subtitle {
+                font-size: 0.9em;
+                margin-bottom: 20px;
+            }
+
+            .schedule-grid {
+                grid-template-columns: 50px repeat(5, 1fr);
+                font-size: 0.75em;
+                gap: 1px;
+            }
+
+            .day-header {
+                font-size: 0.85em;
+                padding: 12px 4px;
+                writing-mode: horizontal-tb;
+            }
+
+            .time-label {
+                font-size: 0.7em;
+                padding: 8px 4px;
+            }
+
+            .time-slot {
+                min-height: 95px;
+            }
+
+            .class-block {
+                font-size: 0.7em;
+                padding: 8px 4px 4px 4px;
+            }
+
+            .class-name {
+                font-size: 0.95em;
+                margin-bottom: 2px;
+            }
+
+            .class-details {
+                font-size: 0.8em;
+            }
+
+            .class-band {
+                height: 5px;
+                margin: 6px -4px -4px -4px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+                padding-bottom: 100px;
+            }
+
+            .container {
+                padding: 10px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .subtitle {
+                font-size: 0.85em;
+            }
+
+            .schedule-grid {
+                grid-template-columns: 45px repeat(5, 1fr);
+                font-size: 0.7em;
+            }
+
+            .day-header {
+                font-size: 0.75em;
+                padding: 10px 2px;
+                font-weight: 600;
+            }
+
+            .time-label {
+                font-size: 0.65em;
+                padding: 6px 2px;
+            }
+
+            .time-slot {
+                min-height: 90px;
+            }
+
+            .class-block {
+                font-size: 0.65em;
+                padding: 7px 3px 3px 3px;
+            }
+
+            .class-name {
+                font-size: 0.9em;
+                margin-bottom: 1px;
+                line-height: 1.2;
+            }
+
+            .class-details {
+                font-size: 0.75em;
+                line-height: 1.2;
+            }
+
+            .class-band {
+                height: 4px;
+                margin: 5px -3px -3px -3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🥋 Class Schedule</h1>
+        <p class="subtitle">Weekly Martial Arts Training Program</p>
+
+        <div class="schedule-grid">
+            <!-- Header Row -->
+            <div class="time-label">Time</div>
+            <div class="day-header">Monday</div>
+            <div class="day-header">Tuesday</div>
+            <div class="day-header">Wednesday</div>
+            <div class="day-header">Thursday</div>
+            <div class="day-header">Friday</div>
+
+            <!-- 12:00 PM Row -->
+            <div class="time-label">12:00<br>PM</div>
+            <div class="time-slot">
+                <div class="class-block all-belts duration-60">
+                    <div class="class-content">
+                        <div class="class-name">Daytime Class</div>
+                        <div class="class-details">All Belts</div>
+                    </div>
+                    <div class="class-band"></div>
+                </div>
+            </div>
+            <div class="time-slot"></div>
+            <div class="time-slot">
+                <div class="class-block all-belts duration-60">
+                    <div class="class-content">
+                        <div class="class-name">Daytime Class</div>
+                        <div class="class-details">All Belts</div>
+                    </div>
+                    <div class="class-band"></div>
+                </div>
+            </div>
+            <div class="time-slot"></div>
+            <div class="time-slot">
+                <div class="class-block all-belts duration-60">
+                    <div class="class-content">
+                        <div class="class-name">Daytime Class</div>
+                        <div class="class-details">All Belts</div>
+                    </div>
+                    <div class="class-band"></div>
+                </div>
+            </div>
+
+            <!-- 5:30 PM Row -->
+            <div class="time-label">5:30<br>PM</div>
+            <div class="time-slot">
+                <div class="class-block little-ninjas duration-30">
+                    <div class="class-content">
+                        <div class="class-name">Little Ninjas</div>
+                        <div class="class-details">Ages 3-5</div>
+                    </div>
+                    <div class="class-band"></div>
+                </div>
+            </div>
+            <div class="time-slot"></div>
+            <div class="time-slot">
+                <div class="class-block little-ninjas duration-30">
+                    <div class="class-content">
+                        <div class="class-name">Little Ninjas</div>
+                        <div class="class-details">Ages 3-5</div>
+                    </div>
+                    <div class="class-band"></div>
+                </div>
+            </div>
+            <div class="time-slot"></div>
+            <div class="time-slot"></div>
+
+            <!-- 6:00 PM Row -->
+            <div class="time-label">6:00<br>PM</div>
+            <div class="time-slot">
+                <div class="class-block beginner duration-50">
+                    <div class="class-content">
+                        <div class="class-name">Beginner Class</div>
+                        <div class="class-details">White, Yellow, Orange</div>
+                    </div>
+                    <div class="class-band"></div>
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="class-block beginner duration-50">
+                    <div class="class-content">
+                        <div class="class-name">Beginner Class</div>
+                        <div class="class-details">White, Yellow, Orange</div>
+                    </div>
+                    <div class="class-band"></div>
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="class-block beginner duration-50">
+                    <div class="class-content">
+                        <div class="class-name">Beginner Class</div>
+                        <div class="class-details">White, Yellow, Orange</div>
+                    </div>
+                    <div class="class-band"></div>
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="class-block sparring duration-50">
+                    <div class="class-content">
+                        <div class="class-name">Youth Sparring</div>
+                        <div class="class-details">12 & Under</div>
+                    </div>
+                    <div class="class-band"></div>
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="class-block conditioning duration-50">
+                    <div class="class-content">
+                        <div class="class-name">Conditioning</div>
+                        <div class="class-details">All Belts</div>
+                    </div>
+                    <div class="class-band"></div>
+                </div>
+            </div>
+
+            <!-- 6:50 PM Row -->
+            <div class="time-label">6:50<br>PM</div>
+            <div class="time-slot">
+                <div class="class-block intermediate duration-50">
+                    <div class="class-content">
+                        <div class="class-name">Intermediate Class</div>
+                        <div class="class-details">Green, Blue, Purple</div>
+                    </div>
+                    <div class="class-band"></div>
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="class-block intermediate duration-50">
+                    <div class="class-content">
+                        <div class="class-name">Intermediate Class</div>
+                        <div class="class-details">Green, Blue, Purple</div>
+                    </div>
+                    <div class="class-band"></div>
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="class-block intermediate duration-50">
+                    <div class="class-content">
+                        <div class="class-name">Intermediate Class</div>
+                        <div class="class-details">Green, Blue, Purple</div>
+                    </div>
+                    <div class="class-band"></div>
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="class-block sparring duration-50">
+                    <div class="class-content">
+                        <div class="class-name">Adult Sparring</div>
+                        <div class="class-details">Ages 13+</div>
+                    </div>
+                    <div class="class-band"></div>
+                </div>
+            </div>
+            <div class="time-slot"></div>
+
+            <!-- 7:40 PM Row -->
+            <div class="time-label">7:40<br>PM</div>
+            <div class="time-slot">
+                <div class="class-block advanced duration-50">
+                    <div class="class-content">
+                        <div class="class-name">Advanced Class</div>
+                        <div class="class-details">Brown, Red, Black</div>
+                    </div>
+                    <div class="class-band"></div>
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="class-block advanced duration-50">
+                    <div class="class-content">
+                        <div class="class-name">Advanced Class</div>
+                        <div class="class-details">Brown, Red, Black</div>
+                    </div>
+                    <div class="class-band"></div>
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="class-block advanced duration-50">
+                    <div class="class-content">
+                        <div class="class-name">Advanced Class</div>
+                        <div class="class-details">Brown, Red, Black</div>
+                    </div>
+                    <div class="class-band"></div>
+                </div>
+            </div>
+            <div class="time-slot"></div>
+            <div class="time-slot"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About • Lonestar Institute of Taekwondo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Page-scoped helpers for secondary pages (use brand tokens from :root) */
+    .page-container { width: min(1200px, 92vw); margin: 0 auto; }
+    .section { padding: clamp(48px, 8vw, 88px) 0; }
+    .kicker { font-family: Arial, sans-serif; letter-spacing: .22em; text-transform: uppercase; color: var(--secondary); font-size: .85rem; }
+    .h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; letter-spacing: .5px; }
+    .h2 { font-size: clamp(1.5rem, 3.5vw, 2.25rem); line-height: 1.2; letter-spacing: .3px; }
+    .lead { font-family: Arial, sans-serif; color: var(--text-medium); font-size: clamp(1rem, 2.5vw, 1.125rem); line-height: 1.7; }
+    .content { font-family: Arial, sans-serif; color: var(--text-medium); line-height: 1.8; font-size: 1rem; }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; padding: .9rem 1.5rem; border-radius: 999px; text-transform: uppercase; letter-spacing: .06em; font-weight: 700; transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease; }
+    .btn:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; }
+    .btn-primary { background: var(--hero-accent); color: #fff; box-shadow: 0 18px 34px rgba(238, 51, 66, .26); }
+    .btn-primary:hover { background: var(--hero-accent-hover); transform: translateY(-2px); }
+    .btn-secondary { color: var(--primary); border: 2px solid var(--primary); background: #fff; }
+    .btn-secondary:hover { color: #fff; background: var(--secondary); border-color: transparent; transform: translateY(-2px); }
+
+    /* 1. Narrow Hero */
+    .sub-hero { position: relative; display: grid; place-items: center; min-height: 300px; background:
+      linear-gradient(180deg, rgba(0,0,0,.6), rgba(0,0,0,.6)),
+      url('https://source.unsplash.com/1600x600/?architecture,dojo') center/cover no-repeat; color: #fff; text-align: center; }
+    .sub-hero__inner { padding: clamp(32px, 6vw, 72px) 0; display: grid; gap: 12px; }
+    .sub-hero__title { font-size: clamp(2rem, 4.5vw, 3rem); letter-spacing: .5px; text-transform: uppercase; }
+    .sub-hero__subtitle { font-family: Arial, sans-serif; color: rgba(255,255,255,.85); font-size: clamp(1rem, 2.5vw, 1.1rem); }
+
+    /* 2. Intro */
+    .intro { text-align: center; }
+    .intro .content { max-width: 70ch; margin-inline: auto; }
+
+    /* 3. Feature Cards */
+    .features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 3vw, 24px); }
+    .feature-card { background: #fff; border: 1px solid var(--border-color); border-radius: 16px; padding: 20px; display: grid; gap: 12px; box-shadow: 0 8px 24px rgba(16,18,49,.06); }
+    .feature-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; }
+    .feature-card h3 { font-size: 1.1rem; letter-spacing: .02em; }
+    .feature-card a { color: var(--primary); font-weight: 600; }
+    .feature-card a:hover { color: var(--secondary); }
+
+    /* 4 & 6. Split sections */
+    .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 4vw, 48px); align-items: center; }
+    .split__media img { width: 100%; height: clamp(280px, 40vw, 420px); object-fit: cover; border-radius: 16px; }
+    .split .content { max-width: 54ch; }
+
+    /* 5. Stats Bar */
+    .stats { background: var(--surface-blue); }
+    .stats__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; text-align: center; }
+    .stat__num { color: var(--primary); font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; }
+    .stat__label { font-family: Arial, sans-serif; color: var(--text-medium); }
+    .stat__desc { font-family: Arial, sans-serif; color: var(--text-light); font-size: .9rem; }
+
+    /* 7. Gallery */
+    .gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 2vw, 18px); }
+    .gallery__item { position: relative; overflow: hidden; border-radius: 14px; background: #000; }
+    .gallery__item img { width: 100%; height: 100%; aspect-ratio: 5 / 4; object-fit: cover; transition: transform .3s ease, opacity .3s ease; opacity: .92; }
+    .gallery__meta { position: absolute; inset: auto 0 0 0; padding: 14px; color: #fff; background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.5)); }
+    .gallery__item:hover img { transform: scale(1.03); opacity: 1; }
+
+    /* 8. Testimonial */
+    .testimonial { background: var(--surface-green); text-align: center; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+    .testimonial blockquote { font-size: clamp(1.25rem, 3vw, 1.6rem); line-height: 1.5; color: var(--text-dark); max-width: 60ch; margin: 0 auto; font-style: italic; }
+    .testimonial__author { margin-top: 12px; font-family: Arial, sans-serif; color: var(--text-medium); }
+    .testimonial__avatar { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin: 12px auto 0; border: 2px solid var(--primary); }
+
+    /* 9. Accordions */
+    .faq { max-width: 900px; margin: 0 auto; }
+    .accordion { border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; background: #fff; }
+    .accordion__item + .accordion__item { border-top: 1px solid var(--border-color); }
+    .accordion__button { width: 100%; text-align: left; background: #fff; color: var(--text-dark); padding: 16px 18px; display: flex; align-items: center; justify-content: space-between; font-weight: 700; }
+    .accordion__button:hover { background: var(--surface-blue); }
+    .accordion__panel { display: none; padding: 0 18px 16px; color: var(--text-medium); font-family: Arial, sans-serif; }
+
+    /* 10. Services/Process */
+    .process { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .process__item { display: grid; grid-template-columns: 56px 1fr; gap: 14px; align-items: start; background: #fff; border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; }
+    .process__icon { width: 56px; height: 56px; border-radius: 12px; background: var(--surface-blue); display: grid; place-items: center; font-weight: 800; color: var(--primary); }
+
+    /* 11. Image Break */
+    .image-break { min-height: 360px; background:
+      linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.35)),
+      url('https://source.unsplash.com/1600x700/?martial-arts,training') center/cover no-repeat; }
+
+    /* 12. CTA Banner */
+    .cta-banner { text-align: center; color: #fff; position: relative; overflow: hidden; background:
+      linear-gradient(135deg, rgba(42, 51, 143, .85), rgba(0, 129, 111, .85)),
+      url('https://source.unsplash.com/1600x500/?abstract') center/cover no-repeat; }
+    .cta-banner__inner { position: relative; z-index: 1; }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .features { grid-template-columns: 1fr 1fr; }
+      .split { grid-template-columns: 1fr; }
+      .stats__grid { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
+      .gallery { grid-template-columns: 1fr 1fr; }
+      .process { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .features { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr; }
+      .stats__grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 1. Hero Section - Narrow Banner -->
+  <header class="sub-hero" role="banner">
+    <div class="sub-hero__inner page-container">
+      <h1 class="sub-hero__title">Our Story & Values</h1>
+      <p class="sub-hero__subtitle">Discipline, confidence, and community through Taekwondo excellence.</p>
+      <div style="margin-top:12px">
+        <a href="#contact" class="btn btn-primary">Start Your Free Week</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. Introduction Text Block -->
+  <section class="section intro">
+    <div class="page-container">
+      <h2 class="h2" style="margin-bottom:12px;">Tradition Meets Modern Training</h2>
+      <div class="content">
+        <p>At Lonestar Institute of Taekwondo, we combine time-honored martial arts principles with modern coaching to help students of all ages build focus, resilience, and real self-defense skills. Our instructors foster a supportive culture where progress is measured in effort, mindset, and technique.</p>
+        <p>From our Little Ninjas to Adult Programs, every class is designed to challenge and encourage growth. Whether your goal is confidence, fitness, or competition, our community will meet you where you are and help you take the next step.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Three-Column Feature Cards -->
+  <section class="section">
+    <div class="page-container">
+      <div class="features">
+        <article class="feature-card">
+          <img src="https://source.unsplash.com/400x300/?kids,training" alt="Kids training" />
+          <h3>Kid-Focused Curriculum</h3>
+          <p class="content">Age-appropriate coaching that builds respect, listening skills, and coordination while keeping classes fun and active.</p>
+          <a href="#">Learn More</a>
+        </article>
+        <article class="feature-card">
+          <img src="https://source.unsplash.com/400x300/?family,fitness" alt="Family training" />
+          <h3>Family-Friendly Schedules</h3>
+          <p class="content">Flexible programs and times make it simple for families to learn together and stay consistent.</p>
+          <a href="#">Learn More</a>
+        </article>
+        <article class="feature-card">
+          <img src="https://source.unsplash.com/400x300/?martial-arts,dojo" alt="Dojo" />
+          <h3>Confidence & Community</h3>
+          <p class="content">Supportive instructors and a welcoming culture help students stay motivated and reach personal goals.</p>
+          <a href="#">Learn More</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Image Left / Content Right -->
+  <section class="section">
+    <div class="page-container split">
+      <div class="split__media">
+        <img src="https://source.unsplash.com/800x600/?dojo,training" alt="Training hall" />
+      </div>
+      <div>
+        <h2 class="h2">What Sets Us Apart</h2>
+        <p class="content">We focus on strong fundamentals and safe, progressive skill development in a positive environment. Our belt system rewards consistency and character along with technical proficiency.</p>
+        <ul class="content" style="margin-top:8px;">
+          <li>Certified, experienced instructors</li>
+          <li>Clear goals and belt progression</li>
+          <li>Inclusive community for all levels</li>
+        </ul>
+        <div style="margin-top:16px;"><a href="#programs" class="btn btn-secondary">Explore Programs</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Statistics Bar -->
+  <section class="section stats">
+    <div class="page-container stats__grid">
+      <div>
+        <div class="stat__num">15+</div>
+        <div class="stat__label">Years Teaching</div>
+        <div class="stat__desc">Serving our community</div>
+      </div>
+      <div>
+        <div class="stat__num">1,200+</div>
+        <div class="stat__label">Students Trained</div>
+        <div class="stat__desc">Kids, teens, and adults</div>
+      </div>
+      <div>
+        <div class="stat__num">98%</div>
+        <div class="stat__label">Parent Satisfaction</div>
+        <div class="stat__desc">Survey feedback</div>
+      </div>
+      <div>
+        <div class="stat__num">25</div>
+        <div class="stat__label">Weekly Classes</div>
+        <div class="stat__desc">Flexible scheduling</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Content Left / Image Right -->
+  <section class="section">
+    <div class="page-container split">
+      <div>
+        <h2 class="h2">Our Training Philosophy</h2>
+        <p class="content">Progress is personal. We teach students to embrace challenges, support teammates, and carry discipline beyond the mat. Each class balances technique, conditioning, and mindset.</p>
+        <p class="content">Students build confidence by setting goals, practicing consistently, and celebrating milestones along the way.</p>
+      </div>
+      <div class="split__media">
+        <img src="https://source.unsplash.com/800x600/?martial-arts,kick" alt="Kick practice" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Grid Gallery / Case Studies -->
+  <section class="section">
+    <div class="page-container gallery">
+      <article class="gallery__item">
+        <img src="https://source.unsplash.com/500x400/?martial-arts,focus" alt="Focus" />
+        <div class="gallery__meta"><strong>Focus</strong><br><small>Building attention & control</small></div>
+      </article>
+      <article class="gallery__item">
+        <img src="https://source.unsplash.com/500x400/?martial-arts,confidence" alt="Confidence" />
+        <div class="gallery__meta"><strong>Confidence</strong><br><small>Earned through effort</small></div>
+      </article>
+      <article class="gallery__item">
+        <img src="https://source.unsplash.com/500x400/?martial-arts,discipline" alt="Discipline" />
+        <div class="gallery__meta"><strong>Discipline</strong><br><small>Habits that last</small></div>
+      </article>
+      <article class="gallery__item">
+        <img src="https://source.unsplash.com/500x400/?dojo,community" alt="Community" />
+        <div class="gallery__meta"><strong>Community</strong><br><small>Supportive culture</small></div>
+      </article>
+      <article class="gallery__item">
+        <img src="https://source.unsplash.com/500x400/?martial-arts,coach" alt="Coaching" />
+        <div class="gallery__meta"><strong>Coaching</strong><br><small>Experienced instructors</small></div>
+      </article>
+      <article class="gallery__item">
+        <img src="https://source.unsplash.com/500x400/?martial-arts,achievement" alt="Achievement" />
+        <div class="gallery__meta"><strong>Achievement</strong><br><small>Milestones & belts</small></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 8. Testimonial -->
+  <section class="section testimonial">
+    <div class="page-container">
+      <img class="testimonial__avatar" src="https://source.unsplash.com/150x150/?face" alt="Parent portrait" />
+      <blockquote>“Our family has grown so much here. The instructors are patient, the classes are energetic, and my kids can’t wait to come back each week.”</blockquote>
+      <div class="testimonial__author">— Jamie R., Parent</div>
+    </div>
+  </section>
+
+  <!-- 9. Accordion / FAQ -->
+  <section class="section faq">
+    <div class="page-container">
+      <h2 class="h2" style="text-align:center; margin-bottom: 18px;">Frequently Asked Questions</h2>
+      <div class="accordion" id="faq">
+        <div class="accordion__item">
+          <button class="accordion__button" aria-expanded="false" aria-controls="p1" id="h1">What should I bring to my first class?<span>+</span></button>
+          <div class="accordion__panel" id="p1" role="region" aria-labelledby="h1">
+            <p class="content">Wear comfortable athletic clothing and bring a water bottle. We’ll guide you through everything else on day one.</p>
+          </div>
+        </div>
+        <div class="accordion__item">
+          <button class="accordion__button" aria-expanded="false" aria-controls="p2" id="h2">Do I need prior experience?<span>+</span></button>
+          <div class="accordion__panel" id="p2" role="region" aria-labelledby="h2">
+            <p class="content">No experience needed. Our programs welcome beginners and experienced students alike with appropriate level groupings.</p>
+          </div>
+        </div>
+        <div class="accordion__item">
+          <button class="accordion__button" aria-expanded="false" aria-controls="p3" id="h3">Can families train together?<span>+</span></button>
+          <div class="accordion__panel" id="p3" role="region" aria-labelledby="h3">
+            <p class="content">Yes! We offer options for parent-child participation and aligned class times to make family training easier.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Two-Column Service/Process Grid -->
+  <section class="section">
+    <div class="page-container process">
+      <div class="process__item">
+        <div class="process__icon">1</div>
+        <div>
+          <h3>Try a Free Week</h3>
+          <p class="content">Experience the energy, meet our instructors, and see if it’s a fit.</p>
+        </div>
+      </div>
+      <div class="process__item">
+        <div class="process__icon">2</div>
+        <div>
+          <h3>Set Your Goals</h3>
+          <p class="content">Confidence, fitness, competition, or all of the above—we’ll support your path.</p>
+        </div>
+      </div>
+      <div class="process__item">
+        <div class="process__icon">3</div>
+        <div>
+          <h3>Build Consistency</h3>
+          <p class="content">Progress through belts with structured, achievable milestones.</p>
+        </div>
+      </div>
+      <div class="process__item">
+        <div class="process__icon">4</div>
+        <div>
+          <h3>Celebrate Wins</h3>
+          <p class="content">Track growth and enjoy a supportive team atmosphere.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. Full-Width Image Break -->
+  <section class="image-break"></section>
+
+  <!-- 12. Call-to-Action Banner -->
+  <section class="section cta-banner">
+    <div class="page-container cta-banner__inner">
+      <h2 class="h2" style="color:#fff;">Ready to Train?</h2>
+      <p class="lead" style="color:rgba(255,255,255,.9);">Claim your free week and take the first step today.</p>
+      <div style="display:flex; gap:12px; justify-content:center; margin-top:8px;">
+        <a href="index.html#free-week" class="btn btn-primary">Claim Free Week</a>
+        <a href="tel:+16825548531" class="btn btn-secondary">Call Us</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Simple accordion logic: only one open at a time
+    (function(){
+      const root = document.getElementById('faq');
+      if (!root) return;
+      const items = Array.from(root.querySelectorAll('.accordion__item'));
+      items.forEach(item => {
+        const btn = item.querySelector('.accordion__button');
+        const panel = item.querySelector('.accordion__panel');
+        btn.addEventListener('click', () => {
+          const expand = btn.getAttribute('aria-expanded') === 'true';
+          // close all
+          items.forEach(i => {
+            i.querySelector('.accordion__button').setAttribute('aria-expanded', 'false');
+            i.querySelector('.accordion__panel').style.display = 'none';
+          });
+          // open current if it was closed
+          if (!expand) {
+            btn.setAttribute('aria-expanded', 'true');
+            panel.style.display = 'block';
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
