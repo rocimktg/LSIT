@@ -107,9 +107,11 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    width: min(640px, 92vw);
     max-width: min(640px, 92vw);
-    max-height: 50vh;
-    height: min(50vh, 520px);
+    min-height: clamp(360px, 40vh, 520px);
+    height: auto;
+    max-height: none;
     padding: clamp(1.25rem, 2.5vw, 2.25rem) clamp(1.5rem, 3vw, 2.75rem);
     padding-block-end: clamp(1.75rem, 3.25vw, 3rem);
     color: var(--overlay-heading);
