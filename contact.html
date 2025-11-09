@@ -25,7 +25,8 @@
           <section class="card card--compact contact-panel contact-panel--form" aria-labelledby="contact-form-title">
             <h3 id="contact-form-title">Send Us a Message</h3>
             <p class="contact-panel__lead">Drop us a line and we'll get back to you within one business day.</p>
-            <form id="contact-form" class="contact-form" action="/api/contact" method="post" novalidate>
+            <form id="contact-form" name="contact" class="contact-form" action="/api/contact" method="post" netlify novalidate>
+              <input type="hidden" name="form-name" value="contact">
               <div class="form-field">
                 <label for="contact-name">Name<span aria-hidden="true">*</span></label>
                 <input type="text" id="contact-name" name="name" autocomplete="name" required placeholder="Chuck Norris">
