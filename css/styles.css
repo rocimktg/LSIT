@@ -2315,6 +2315,16 @@ html { scroll-behavior: smooth; }
   color: var(--secondary);
 }
 
+.form-error {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(238, 51, 66, 0.08);
+  border: 1px solid rgba(238, 51, 66, 0.4);
+  font-family: Arial, sans-serif;
+  color: #5c0b12;
+}
+
 .contact-info {
   display: grid;
   gap: 18px;

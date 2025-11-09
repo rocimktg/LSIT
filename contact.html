@@ -25,8 +25,22 @@
           <section class="card card--compact contact-panel contact-panel--form" aria-labelledby="contact-form-title">
             <h3 id="contact-form-title">Send Us a Message</h3>
             <p class="contact-panel__lead">Drop us a line and we'll get back to you within one business day.</p>
-            <form id="contact-form" name="contact" class="contact-form" action="/api/contact" method="post" netlify novalidate>
+            <form
+              id="contact-form"
+              name="contact"
+              class="contact-form"
+              action="/contact"
+              method="post"
+              netlify
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              novalidate>
               <input type="hidden" name="form-name" value="contact">
+              <p class="visually-hidden">
+                <label>Don’t fill this out if you're human.
+                  <input type="text" name="bot-field" tabindex="-1" autocomplete="off">
+                </label>
+              </p>
               <div class="form-field">
                 <label for="contact-name">Name<span aria-hidden="true">*</span></label>
                 <input type="text" id="contact-name" name="name" autocomplete="name" required placeholder="Chuck Norris">
@@ -57,12 +71,16 @@
               </div>
 
               <p class="form-note">We respect your privacy. Your information will only be used to respond to your inquiry.</p>
-              <!-- Temporarily removed until form handling is ready
               <div class="form-success" id="form-success" role="status" aria-live="polite" hidden>
                 <i data-lucide="sparkles" aria-hidden="true"></i>
-                Thank you for contacting us! We'll get back to you within 24 hours. Need immediate assistance? Call us at <a href="tel:+16825548531">(682) 554-8531</a>.
+                <div>
+                  <strong>Message sent!</strong>
+                  <p>Thanks for reaching out. We'll follow up within one business day — call <a href="tel:+16825548531">(682) 554-8531</a> if you need a faster reply.</p>
+                </div>
               </div>
-              -->
+              <p class="form-error" id="form-error" role="status" aria-live="polite" hidden>
+                Something went wrong while sending your message. Please try again or email us at <a href="mailto:info@lsitkd.com">info@lsitkd.com</a>.
+              </p>
             </form>
           </section>
 
