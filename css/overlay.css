@@ -21,7 +21,9 @@
     position: relative;
     overflow: hidden;
     isolation: isolate;
-    background: linear-gradient(130deg, #022623 0%, #010807 100%);
+    background:
+        linear-gradient(130deg, #022623 0%, #010807 100%),
+        url('../img/fallback.jpg') center/cover no-repeat;
 }
 
 .video-wrap video {
