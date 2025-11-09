@@ -21,9 +21,22 @@
     position: relative;
     overflow: hidden;
     isolation: isolate;
+}
+
+.video-wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0;
     background:
         linear-gradient(130deg, #022623 0%, #010807 100%),
         url('../img/fallback.jpg') center/cover no-repeat;
+    z-index: 0;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+.video-wrap.is-playing::before {
+    opacity: 0;
 }
 
 .video-wrap video {
@@ -35,6 +48,12 @@
     display: block;
     filter: saturate(1.1) contrast(1.05);
     z-index: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.video-wrap.is-playing .hero__video {
+    opacity: 1;
 }
 
 .video-wrap video[data-paused="true"] {

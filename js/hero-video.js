@@ -1,7 +1,16 @@
 (() => {
   const autoPlayHero = () => {
     const video = document.querySelector('.hero__video');
-    if (!video) return;
+    const wrap = video?.closest('.video-wrap');
+    if (!video || !wrap) return;
+
+    const markPlaying = (isPlaying) => {
+      if (isPlaying) {
+        wrap.classList.add('is-playing');
+      } else {
+        wrap.classList.remove('is-playing');
+      }
+    };
 
     const ensureInline = () => {
       video.muted = true;
@@ -12,22 +21,37 @@
     };
 
     const tryPlay = () => {
+      ensureInline();
       const playPromise = video.play();
       if (playPromise && typeof playPromise.then === 'function') {
-        playPromise.catch(() => {
-          video.setAttribute('data-paused', 'true');
-        });
+        playPromise
+          .then(() => markPlaying(true))
+          .catch(() => markPlaying(false));
       }
     };
 
-    ensureInline();
+    const resetToPoster = () => {
+      markPlaying(false);
+      video.setAttribute('poster', 'img/fallback.jpg');
+    };
+
+    markPlaying(false);
     tryPlay();
 
-    video.addEventListener('loadeddata', tryPlay);
+    video.addEventListener('playing', () => markPlaying(true));
+    video.addEventListener('pause', () => markPlaying(false));
+    video.addEventListener('ended', () => {
+      video.currentTime = 0;
+      tryPlay();
+    });
+    video.addEventListener('error', resetToPoster);
+    video.addEventListener('stalled', tryPlay);
+
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible') {
-        ensureInline();
         tryPlay();
+      } else {
+        markPlaying(false);
       }
     });
   };
