@@ -44,7 +44,7 @@
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    background: linear-gradient(45deg, rgba(4, 112, 98, 0.85), rgba(0, 0, 0, 0.9));
+    background: linear-gradient(45deg, rgba(4, 112, 98, 0.8), rgba(0, 0, 0, 0.85));
     mix-blend-mode: multiply;
 }
 
@@ -60,7 +60,7 @@
     background-image: url('../textures/noise.png');
     background-size: 192px 192px;
     mix-blend-mode: overlay;
-    opacity: 0.06;
+    opacity: 0.04;
     animation: filmGrain 8s steps(8) infinite;
 }
 
@@ -80,7 +80,7 @@
     inset: 0;
     pointer-events: none;
     z-index: 3;
-    background: radial-gradient(circle at center, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.8) 100%);
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.7) 100%);
 }
 
 .text-glass {
@@ -91,7 +91,7 @@
     max-width: min(640px, 92vw);
     max-height: 50vh;
     height: min(50vh, 520px);
-    padding: clamp(1rem, 1.8vw, 1.5rem) clamp(1.1rem, 2.5vw, 1.75rem);
+    padding: clamp(1.25rem, 2.5vw, 2.25rem) clamp(1.5rem, 3vw, 2.75rem);
     color: var(--overlay-heading);
     background: var(--overlay-panel-gloss);
     border-left: 4px solid var(--secondary);
@@ -131,14 +131,19 @@
 }
 
 .text-glass .hero__button {
-    max-width: 100%;
-    min-width: 0;
-    flex: 1 1 220px;
+    width: 260px;
+    max-width: 260px;
+    min-width: 260px;
+    flex: 0 0 260px;
+}
+
+.text-glass .hero__button .hero__button-label {
+    white-space: nowrap;
 }
 
 .hero--emerald .hero__actions .hero__button {
-    min-width: 0;
-    flex: 1 1 220px;
+    min-width: 260px;
+    flex: 0 0 260px;
 }
 
 .hero--emerald .hero__button--primary {
@@ -194,22 +199,34 @@
 }
 
 @media (max-width: 768px) {
+    .overlay--gradient {
+        background: linear-gradient(180deg, rgba(4, 112, 98, 0.55), rgba(0, 0, 0, 0.6));
+    }
+
+    .overlay--grain {
+        opacity: 0.02;
+    }
+
     .text-glass.hero__content {
         position: relative;
         left: auto;
         top: auto;
         margin: clamp(16px, 6vw, 32px) auto;
-        width: min(560px, 100%);
+        width: auto;
         max-width: 100%;
         max-height: none;
         height: auto;
         transform: none;
         z-index: 10;
         border-left: 0;
-        border-radius: 18px;
-        padding: clamp(1.25rem, 4vw, 1.75rem) clamp(1.25rem, 5vw, 2rem);
+        border-radius: 0;
+        padding: clamp(1.25rem, 4vw, 1.5rem) clamp(1rem, 4vw, 1.5rem);
         align-items: center;
         text-align: center;
+        background: transparent;
+        box-shadow: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
     }
 
     .hero--emerald .video-wrap {
