@@ -75,8 +75,23 @@
                     </div>
 
                     <div class="lead-capture__card">
-                        <form name="lead-capture" class="lead-capture__form" action="#" method="post" netlify novalidate aria-describedby="lead-capture-disclaimer">
+                        <form
+                            id="lead-form"
+                            name="lead-capture"
+                            class="lead-capture__form"
+                            action="/"
+                            method="post"
+                            netlify
+                            data-netlify="true"
+                            netlify-honeypot="bot-field"
+                            novalidate
+                            aria-describedby="lead-capture-disclaimer">
                             <input type="hidden" name="form-name" value="lead-capture">
+                            <p class="visually-hidden">
+                                <label>Do not fill this field if you are human.
+                                    <input type="text" name="bot-field" tabindex="-1" autocomplete="off">
+                                </label>
+                            </p>
                             <div class="lead-capture__field">
                                 <label class="lead-capture__micro-label" for="lead-name">Name</label>
                                 <input type="text" id="lead-name" name="name" placeholder="John Smith" required>
@@ -99,6 +114,16 @@
                                 CLAIM FREE WEEK
                                 <i data-lucide="arrow-right" aria-hidden="true"></i>
                             </button>
+                            <div class="lead-capture__status lead-capture__status--success" id="lead-success" role="status" aria-live="polite" hidden>
+                                <i data-lucide="sparkles" aria-hidden="true"></i>
+                                <div>
+                                    <strong>Free week locked in!</strong>
+                                    <p>Check your email for next steps, or call <a href="tel:+16825548531">(682) 554-8531</a> to schedule right away.</p>
+                                </div>
+                            </div>
+                            <p class="lead-capture__status lead-capture__status--error" id="lead-error" role="status" aria-live="polite" hidden>
+                                We couldn't send your request just now. Please try again or email <a href="mailto:info@lsitkd.com">info@lsitkd.com</a>.
+                            </p>
                         </form>
                     </div>
                 </div>
@@ -495,6 +520,7 @@
     <script src="load-footer.js"></script>
     <script src="tenets-marquee.js"></script>
     <script src="menu.js"></script>
+    <script src="js/lead-form.js"></script>
     <script src="js/hero-video.js"></script>
 </body>
 </html>
