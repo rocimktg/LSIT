@@ -86,6 +86,29 @@
             transition: color 0.3s;
         }
 
+        a.utility-item.calendar-link {
+            text-decoration: none;
+            font-weight: 700;
+            font-size: var(--text-lg);
+            color: #646464;
+        }
+
+        a.utility-item.calendar-link:hover,
+        a.utility-item.calendar-link:focus-visible {
+            color: var(--hero-accent);
+        }
+
+        .utility-item.calendar-link .icon {
+            color: currentColor;
+        }
+
+        .utility-divider {
+            color: #c1c1c1;
+            font-size: 0.85rem;
+            line-height: 1;
+            user-select: none;
+        }
+
         a.utility-item:hover,
         a.utility-item:focus-visible {
             color: var(--primary);
